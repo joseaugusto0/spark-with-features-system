@@ -1,4 +1,9 @@
 # Spark with features system
+<div style="display: flex; justify-content: center; align-items: center;">
+  <img src="./images/logo-spark.png" alt="Apache-Spark-Logo" height="115" style="margin: 1px;"/>
+  <img src="./images/logo-livy.png" alt="Apache-Livy-Logo" height="115" style="margin: 1px;"/>
+  <img src="./images/logo-zeppelin.png" alt="Apache-Zeppelin-Logo" height="115" style="margin: 1px;"/>
+</div>
 
 > Ecossistema Apache e seus componentes (Livy e Zeppelin)
 
