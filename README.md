@@ -17,7 +17,7 @@ Nesse projeto será apresentado uma estrutura base para levantar um sistema (em 
     - [2.2 Iniciando Spark e Apache Livy com o Docker](#22-iniciando-spark-e-apache-livy-com-o-docker)
     - [2.3 Deploy com Apache Zeppelin e Livy no Docker](#23-deploy-com-apache-zeppelin-e-livy-no-docker)
     - [2.4 Inicializando as funções utilizando spark-submit](#24-inicializando-as-funções-utilizando-spark-submit)
-- [3. Comandos Úteis Docker](#3-comandos-úteis-docker)
+- [4. Comandos Úteis Docker](#4-comandos-úteis-docker)
 - [Tecnologias](#tecnologias)
 
 ## 1. Clonando projeto localmente
@@ -154,7 +154,7 @@ E ele retornará as funções presentes que podem ser inicializadas e os segment
 ```
 Dessa forma criaremos um namespace chamado **spark** para separar todos os serviços utilizados no cluster
 
-## 3.1 Iniciando apenas o Spark
+## 3.2 Iniciando com Apache Livy e Spark
 
 - Faça o build da imagem do spark seguindo os passos iniciais de [2.2 Iniciando Spark e Apache Livy](#22-iniciando-spark-e-apache-livy)
 - Na pasta **/deploy-livy/k8s** rode os seguinte comando:
@@ -164,7 +164,7 @@ Dessa forma criaremos um namespace chamado **spark** para separar todos os servi
 ```
 Dessa forma criaremos um namespace chamado **livy-spark** para separar todos os serviços utilizados no cluster
 
-## 3. Comandos Úteis Docker
+## 4. Comandos Úteis Docker
 
 Segue abaixo alguns comandos que podem ser utilizados no Docker.
 
