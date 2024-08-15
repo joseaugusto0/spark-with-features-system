@@ -37,15 +37,15 @@ Link do [Projeto](#).
 
 O projeto deverá ser inicializado em um terminal do WSL (ou outro terminal), caso precise configurar o terminal, clique neste [link](https://learn.microsoft.com/pt-br/windows/wsl/install). Este terminal precisa ter acesso ao Docker, que pode ser via [Docker Desktop](https://docs.docker.com/desktop/wsl/) ou [Rancher Desktop](https://docs.rancherdesktop.io/ui/preferences/wsl/). Para o processamento, as seguintes variáveis de ambiente são necessárias:
 
-### 2.1 Iniciando apenas o Spark com o Docker
+### 2.1 Iniciando apenas o Spark
 
-- Vá até a raiz do projeto em um terminal e rode o seguinte comando para fazer o build da imagem do projeto
+- Vá até a pasta **spark** em um terminal e rode o seguinte comando para fazer o build da imagem do projeto
 
 ```
-    docker-compose build
+    docker build -t spark-master -f ./Dockerfile .
 ```
 
-Será gerada uma imagem **ecossistema-apache**. Para o build da imagem, há o Dockerfile que basicamente usará a imagem [docker.io/bitnami/spark:3.5](https://hub.docker.com/r/bitnami/spark) como base, irá copiar o arquivo **requirements.txt** que possui as bibliotecas necessárias do python, os arquivos dentro da pasta **jars** que são os jars necessários para o pyspark acessar um banco de dados MongoDB ou Oracle.
+Será gerada uma imagem **spark-master**. Para o build da imagem, há o Dockerfile que basicamente usará a imagem [docker.io/bitnami/spark:3.5](https://hub.docker.com/r/bitnami/spark) como base, irá copiar o arquivo **requirements.txt** que possui as bibliotecas necessárias do python, os arquivos dentro da pasta **jars** que são os jars necessários para o pyspark acessar um banco de dados MongoDB ou Oracle.
 
 - Após isso, precisamos rodar a imagem com o seguinte comando
 
@@ -57,7 +57,7 @@ Será criado um container chamado **spark-master** e **spark-worker-1**
 
 - Se tudo estiver certo, a UI do Spark estará rodando em **http://localhost:8080** (caso queira alterar a porta, tem como alterar a relação de portas do docker-compose também). **Importante:** assim que levantar o container, no terminal irá aparecer a url exata do spark-master, assim como na UI do Spark, caso necessário.
 
-### 2.2 Iniciando Spark e Apache Livy com o Docker
+### 2.2 Iniciando Spark e Apache Livy
 
 - Entre na pasta **deploy-livy** e rode o bash download_archives.sh, irá baixar os arquivos do apache-livy e o spark nas versões corretas
 - Ainda na pasta **deploy-livy** rode o seguinte comando:
@@ -85,7 +85,7 @@ Será gerada a imagem **apache-livy-docker**, instalando o Python 3.11 e as bibl
     }
 ```
 
-### 2.3 Deploy com Apache Zeppelin e Livy no Docker
+### 2.3 Deploy com Apache Zeppelin e Livy
 
 - Faça o build da imagem do Livy seguindo os passos de [2.2 Iniciando Spark e Apache Livy com o Docker](#22-iniciando-spark-e-apache-livy-com-o-docker).
 
@@ -142,7 +142,19 @@ Essa instância de docker está habilitada a receber requisições de aplicaçõ
 
 E ele retornará as funções presentes que podem ser inicializadas e os segmentos que as funções podem ser destinadas. Mas abaixo segue a explicação de cada uma das funções
 
-# 3. Comandos Úteis Docker
+## 3. Iniciando as aplicações com Kubernetes
+
+## 3.1 Iniciando apenas o Spark
+
+- Faça o build da imagem do spark seguindo os passos iniciais de [2.1 Iniciando apenas o Spark](#21-iniciando-apenas-o-spark)
+- Na pasta **/spark/k8s** rode os seguinte comando:
+```sh
+    kubectl create namespace spark
+    kubectl apply -f ./
+```
+Dessa forma criaremos um namespace chamado **spark** para separar todos os serviços utilizados no cluster
+
+## 3. Comandos Úteis Docker
 
 Segue abaixo alguns comandos que podem ser utilizados no Docker.
 
