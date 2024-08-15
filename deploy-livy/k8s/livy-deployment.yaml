@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: livy
+  namespace: livy-spark
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: livy
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: ./kompose convert -f docker-compose.spark_bitnami.yml
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: livy
+    spec:
+      containers:
+        - env:
+            - name: LIVY_FILE_LOCAL_DIR_WHITELIST
+              value: /opt/
+            - name: SPARK_MASTER_ENDPOINT
+              value: spark
+            - name: SPARK_MASTER_PORT
+              value: "7077"
+          image: apache-livy-docker
+          imagePullPolicy: IfNotPresent
+          name: livy
+          ports:
+            - containerPort: 8998
+            - containerPort: 27018
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/jars
+              name: livy-claim0
+            - mountPath: /opt/livy.conf.extra
+              name: livy-claim1
+      restartPolicy: Always
+      volumes:
+        - name: livy-claim0
+          persistentVolumeClaim:
+            claimName: livy-claim0
+        - name: livy-claim1
+          persistentVolumeClaim:
+            claimName: livy-claim1
+status: {}

@@ -154,6 +154,16 @@ E ele retornará as funções presentes que podem ser inicializadas e os segment
 ```
 Dessa forma criaremos um namespace chamado **spark** para separar todos os serviços utilizados no cluster
 
+## 3.1 Iniciando apenas o Spark
+
+- Faça o build da imagem do spark seguindo os passos iniciais de [2.2 Iniciando Spark e Apache Livy](#22-iniciando-spark-e-apache-livy)
+- Na pasta **/deploy-livy/k8s** rode os seguinte comando:
+```sh
+    kubectl create namespace livy-spark
+    kubectl apply -f ./
+```
+Dessa forma criaremos um namespace chamado **livy-spark** para separar todos os serviços utilizados no cluster
+
 ## 3. Comandos Úteis Docker
 
 Segue abaixo alguns comandos que podem ser utilizados no Docker.

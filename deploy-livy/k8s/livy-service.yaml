@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: livy
+  namespace: livy-spark
+spec:
+  type: LoadBalancer
+  ports:
+    - name: "8998"
+      port: 8998
+      targetPort: 8998
+  selector:
+    io.kompose.service: livy
+status:
+  loadBalancer: {}
